@@ -5,20 +5,16 @@ C# library to talk to Telegrams Bot API (https://core.telegram.org/bots/api)
 ## Usage
 
 ```C#
-static async void testApiAsync()
+static void testApiAsync()
 {
-    var Bot = new Telegram.Bot.Api("your API access Token");
+    var Bot = new Telegram.Bot.MyApi("your API access Token");
     var me = await Bot.GetMe();
     System.Console.WriteLine("Hello my name is " + me.FirstName);
-}
-```
-
-```C#
-static void testApi()
-{
-    var Bot = new Telegram.Bot.Api("your API access Token");
-    var me = Bot.GetMe().Result;
-    System.Console.WriteLine("Hello my name is " + me.FirstName);
+    Bot.OnMessage += OnMessage;
+    Bot.OnInlineQuery += OnInlineQuery;
+    Bot.OnChooseInlineResult += OnChooseInlineResult;
+    Bot.Start();
+    Bot.WaitToDie();
 }
 ```
 
